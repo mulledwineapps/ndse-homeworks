@@ -5,13 +5,14 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "cmd": "node ./cmd.js",
+    "getdate": "node ./getdate.js",
     "game": "node ./game.js"
   },
-  "author": "",
+  "author": "olesya lugovaya",
   "license": "ISC",
   "bin": {
-    "cmd": "./cli.js"
+    "getdate": "./getdate.js",
+    "game": "./game.js"
   },
   "dependencies": {
     "moment": "^2.30.1",
