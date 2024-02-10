@@ -1,12 +1,10 @@
-#!/usr/bin/env node
-
 const yargs = require('yargs/yargs')
 const moment = require('moment');
 
 const { hideBin } = require('yargs/helpers');
 const { demandCommand } = require('yargs');
 
-var argv = yargs(hideBin(process.argv))
+yargs(hideBin(process.argv))
     .command({
         command: 'current',
         builder: setBooleanOptions,
