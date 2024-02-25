@@ -5,8 +5,8 @@ const { hideBin } = require('yargs/helpers');
 
 var argv = yargs(hideBin(process.argv))
     .check((argv) => {
-        const filePath = argv._
-        if (filePath.length == 1) {
+        const args = argv._
+        if (args.length == 1) {
             return true
         } else {
             throw new Error("Пожалуйста, укажите название города, для которого требуется вывести прогноз.")
