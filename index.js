@@ -32,7 +32,7 @@ const app = express();
 app.use(express.json());
 
 app.post('/api/user/login', (req, res) => {
-    res.statusCode = 201;
+    res.status(201);
     res.json({ id: 1, mail: "test@mail.ru" })
 });
 
@@ -49,7 +49,7 @@ app.get('/api/books/:id', (req, res) => {
     if (idx !== -1) {
         res.json(books[idx]);
     } else {
-        res.statusCode = 404;
+        res.status(404);
         res.json('404 | страница не найдена');
     }
 });
@@ -96,7 +96,7 @@ app.put('/api/books/:id', (req, res) => {
 
         res.json(books[idx]);
     } else {
-        res.statusCode = 404;
+        res.status(404);
         res.json('404 | страница не найдена');
     }
 });
@@ -111,7 +111,7 @@ app.delete('/api/books/:id', (req, res) => {
         books.splice(idx, 1);
         res.send('ok')
     } else {
-        res.statusCode = 404;
+        res.status(404);
         res.json('404 | страница не найдена');
     }
 });
