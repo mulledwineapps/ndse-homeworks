@@ -3,21 +3,21 @@ const { v4: uuid } = require('uuid')
 
 class Book {
     constructor(
-        id,
         title = "",
         description = "",
         authors = "",
         favorite = "",
         fileCover = "",
         fileName = "",
+        id = uuid(),
     ) {
-        this.id = id
         this.title = title
         this.description = description
         this.authors = authors
         this.favorite = favorite
         this.fileCover = fileCover
         this.fileName = fileName
+        this.id = id
     }
 };
 
@@ -61,7 +61,6 @@ app.post('/api/books', (req, res) => {
     } = req.body;
 
     const newBook = new Book(
-        uuid(),
         title,
         description,
         authors,
