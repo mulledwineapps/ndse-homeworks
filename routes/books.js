@@ -31,17 +31,37 @@ router.get('/api/books/:id', (req, res) => {
     }
 });
 
-router.get('/api/books/:id/download', (req, res) => {
+router.get('/api/books/:id/download', (req, res, next) => {
     const { books } = library;
     const { id } = req.params;
     const idx = books.findIndex(el => el.id === id);
 
     if (idx !== -1) {
+
         var options = {
             root: path.join(__dirname, '..')
         }
 
-        res.sendFile(books[idx].fileBook, options);
+        const filePath = books[idx].fileBook
+
+        if (filePath.length === 0) {
+            res.status(404);
+            res.json('404 | нет файла для данной книги');
+        } else {
+            var options = { root: path.join(__dirname, '..') }
+            
+            // https://expressjs.com/en/api.html#res.sendFile
+            res.sendFile(filePath, options, function (err) {
+                if (err) {
+                    // Error No Entity
+                    if (err.code === 'ENOENT') {
+                        res.json('404 | указанный файл не существует');
+                        next(err)
+                    }
+                }
+            });
+        }
+
     } else {
         res.status(404);
         res.json('404 | книга не найдена');
