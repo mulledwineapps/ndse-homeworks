@@ -12,28 +12,24 @@ router.get('/', (req, res) => {
     });
 });
 
-router.get('/books/create', (req, res) => {
+router.get('/create', (req, res) => {
     res.render("books/create", {
         title: "book | create",
         book: {},
     });
 });
 
-router.post('/books/create', (req, res) => {
+router.post('/create', (req, res) => {
     const { books } = cache;
-    const {
-        title, description, authors, favorite, fileCover, fileName
-    } = req.body;
+    const { title, description } = req.body;
 
-    const newBook = new book(
-        title, description, authors, favorite, fileCover, fileName,
-    );
+    const newBook = new book(title, description);
     books.push(newBook);
 
     res.redirect(`/books/${newBook.id}`);
 });
 
-router.get('/books/:id', (req, res) => {
+router.get('/:id', (req, res) => {
     const { books } = cache;
     const { id } = req.params;
     const idx = books.findIndex(el => el.id === id);
@@ -49,7 +45,7 @@ router.get('/books/:id', (req, res) => {
 
 });
 
-router.get('/books/update/:id', (req, res) => {
+router.get('/update/:id', (req, res) => {
     const { books } = cache;
     const { id } = req.params;
     const idx = books.findIndex(el => el.id === id);
@@ -64,26 +60,22 @@ router.get('/books/update/:id', (req, res) => {
     });
 });
 
-router.post('/books/update/:id', (req, res) => {
+router.post('/update/:id', (req, res) => {
     const { books } = cache;
     const { id } = req.params;
-    const {
-        title, description, authors, favorite, fileCover, fileName
-    } = req.body;
+    const { title, description } = req.body;
 
     const idx = books.findIndex(el => el.id === id);
 
     if (idx === -1) {
         res.redirect('/404');
     }
-    
-    books[idx] = {
-        ...books[idx], title, description, authors, favorite, fileCover, fileName
-    };
+
+    books[idx] = { ...books[idx], title, description };
     res.redirect(`/books/${id}`);
 });
 
-router.post('/books/delete/:id', (req, res) => {
+router.post('/delete/:id', (req, res) => {
     const { books } = cache;
     const { id } = req.params;
 
@@ -94,7 +86,7 @@ router.post('/books/delete/:id', (req, res) => {
     }
 
     books.splice(idx, 1);
-    res.redirect('/');
+    res.redirect('/books');
 });
 
 module.exports = router;
