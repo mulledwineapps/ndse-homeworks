@@ -36,6 +36,7 @@ router.get('/:id', (req, res) => {
 
     if (idx === -1) {
         res.redirect('/404');
+        return;
     }
 
     res.render("books/view", {
@@ -52,6 +53,7 @@ router.get('/update/:id', (req, res) => {
 
     if (idx === -1) {
         res.redirect('/404');
+        return;
     }
 
     res.render("books/update", {
@@ -69,6 +71,7 @@ router.post('/update/:id', (req, res) => {
 
     if (idx === -1) {
         res.redirect('/404');
+        return;
     }
 
     books[idx] = { ...books[idx], title, description };
@@ -83,6 +86,7 @@ router.post('/delete/:id', (req, res) => {
 
     if (idx === -1) {
         res.redirect('/404');
+        return;
     }
 
     books.splice(idx, 1);
